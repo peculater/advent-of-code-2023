@@ -4,7 +4,7 @@ console.log("yo dawg");
 const fs = require('fs');
 const readline = require('readline');
 
-const filePath = './input'; 
+const filePath = process.argv[2]; // Get the file path from the command line argument
 var sum = 0;
 
 const readInterface = readline.createInterface({
