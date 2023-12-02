@@ -1,7 +1,7 @@
 .PHONY: test partone parttwo
 
 test:
-	node test.js
+	node_modules/.bin/mocha test.js
 
 partone:
 	node 1.js input

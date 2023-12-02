@@ -1,38 +1,4 @@
 
-// Open the file called 'input' and read the content one line at a time
-const fs = require('fs');
-const readline = require('readline');
-
-const filePath = process.argv[2]; // Get the file path from the command line argument
-var sum = 0;
-
-const readInterface = readline.createInterface({
-    input: fs.createReadStream(filePath),
-    output: process.stdout,
-    console: false
-});
-
-readInterface.on('line', function (line) {
-
-    const regex1 = /(\d|one|two|three|four|five|six|seven|eight|nine).*/; // Regular expression with passable capture for the first number
-    const regex2 = /.*(\d|one|two|three|four|five|six|seven|eight|nine)/; // Regular expression with one capture for the last number
-
-    const matches1 = line.match(regex1); // Apply the first regular expression to the line
-    const matches2 = line.match(regex2); // Apply the second regular expression to the line
-
-    if (matches1 && matches2) {
-        const firstNumber = parseIntFromDigitOrString(matches1[1]);
-        const lastNumber = parseIntFromDigitOrString(matches2[1]);
-        console.log("Numbers found: " + firstNumber + " and " + lastNumber);
-        sum += 10 * firstNumber + lastNumber;
-    }
-});
-
-readInterface.on('close', function () {
-    console.log("End sum");
-    console.log(sum);
-});
-
 function parseIntFromDigitOrString(passedString) {
     if (typeof passedString === 'string') {
         switch (passedString) {
@@ -62,7 +28,42 @@ function parseIntFromDigitOrString(passedString) {
     }
 }
 
+function main() {
+    const fs = require('fs');
+    const readline = require('readline');
 
+    const filePath = process.argv[2]; // Get the file path from the command line argument
+    var sum = 0;
 
+    const readInterface = readline.createInterface({
+        input: fs.createReadStream(filePath),
+        output: process.stdout,
+        console: false
+    });
 
+    readInterface.on('line', function (line) {
 
+        const regex1 = /(\d|one|two|three|four|five|six|seven|eight|nine).*/; // Regular expression with passable capture for the first number
+        const regex2 = /.*(\d|one|two|three|four|five|six|seven|eight|nine)/; // Regular expression with one capture for the last number
+
+        const matches1 = line.match(regex1); // Apply the first regular expression to the line
+        const matches2 = line.match(regex2); // Apply the second regular expression to the line
+
+        if (matches1 && matches2) {
+            const firstNumber = parseIntFromDigitOrString(matches1[1]);
+            const lastNumber = parseIntFromDigitOrString(matches2[1]);
+            console.log("Numbers found: " + firstNumber + " and " + lastNumber);
+            sum += 10 * firstNumber + lastNumber;
+        }
+    });
+
+    readInterface.on('close', function () {
+        console.log("End sum");
+        console.log(sum);
+    });
+}
+
+if (require.main === module) {
+    main();
+}
+module.exports = parseIntFromDigitOrString;
