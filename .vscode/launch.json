@@ -35,6 +35,16 @@
             ],
             "program": "${workspaceFolder}/3/3.js",
             "args": ["${workspaceFolder}/3/test"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch 4-parttwo.js",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/4/4-parttwo.js",
+            "args": ["${workspaceFolder}/4/input"]
         }
     ]
 }
