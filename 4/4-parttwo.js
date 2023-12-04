@@ -15,15 +15,11 @@ function buildComparatives(cardString) {
 }
 
 function scoreComparatives(winning, ours) {
-    ourSet = new Set(ours);
-    numberOfMatches = 0;
-    for (let i = 0; i < winning.length; i++) {
-        //if ourset contains a winning number, increment number of matches
-        if (ourSet.has(winning[i])) {
-            numberOfMatches++;
-        }
-    }
-    return numberOfMatches;
+    //Huh, Javascript doesn't have a built-in intersect function.
+    const winningSet = new Set(winning);
+    const ourSet = new Set(ours);
+    const intersectionSize = new Set([...winningSet].filter(x => ourSet.has(x))).size;
+    return intersectionSize;
 }
 
 
